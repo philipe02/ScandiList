@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Title from "../../components/Title";
 
@@ -7,12 +8,14 @@ const ProductList = () => {
             <section className="d-flex justify-content-between">
                 <Title text="Product List" />
                 <div className="button-container">
-                    <Button
-                        id="add-product-btn"
-                        className="btn-outline-primary"
-                        type="button"
-                        title="Add"
-                    />
+                    <Link to="/add-product">
+                        <Button
+                            id="add-product-btn"
+                            className="btn-outline-primary"
+                            type="button"
+                            title="Add"
+                        />
+                    </Link>
                     <Button
                         id="delete-product-btn"
                         className="btn-outline-danger"

@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
-import App from './App';
+import ProductAdd from './pages/ProductAdd';
+import ProductList from './pages/ProductList';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <div className='container mt-4'>
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="add-product" element={<ProductAdd />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
