@@ -1,8 +1,63 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Title from "../../components/Title";
+import ProductsContainer from "../../containers/ProductsContainer";
 
 const ProductList = () => {
+    const productList = [
+        {
+            sku: 1,
+            name: "Roules",
+            price: 20.0,
+            size: 10.5,
+        },
+        {
+            sku: 2,
+            name: "Roules",
+            price: 20.0,
+            size: 10.5,
+        },
+        {
+            sku: 3,
+            name: "Roules",
+            price: 20.0,
+            size: 10.5,
+        },
+        {
+            sku: 4,
+            name: "Roules",
+            price: 20.0,
+            size: 10.5,
+        },
+        {
+            sku: 5,
+            name: "Roules",
+            price: 20.0,
+            size: 10.5,
+        },
+        {
+            sku: 6,
+            name: "Roules",
+            price: 20.0,
+            size: 10.5,
+        },
+    ];
+
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => setProducts(productList), []);
+
+    useEffect(() => console.log(products), [products]);
+
+    function handleDelete() {
+        let deleteList = [];
+        products.forEach((item) => {
+            if (item.selected) deleteList.push(item.sku);
+        });
+        console.log(deleteList);
+    }
+
     return (
         <>
             <section className="d-flex justify-content-between">
@@ -21,26 +76,12 @@ const ProductList = () => {
                         className="btn-outline-danger"
                         type="button"
                         title="Mass delete"
+                        onClick={handleDelete}
                     />
                 </div>
             </section>
             <hr className="opacity-100 border-top border-2 border-dark" />
-            <section className="container">
-                <div className="row">
-                    <div class="col d-flex m-2 justify-content-center border border-dark border-2">
-                        1 of 4
-                    </div>
-                    <div class="col d-flex m-2 justify-content-center border border-dark border-2">
-                        2 of 4
-                    </div>
-                    <div class="col d-flex m-2 justify-content-center border border-dark border-2">
-                        3 of 4
-                    </div>
-                    <div class="col d-flex m-2 justify-content-center border border-dark border-2">
-                        4 of 4
-                    </div>
-                </div>
-            </section>
+            <ProductsContainer products={products} setProducts={setProducts} />
         </>
     );
 };
