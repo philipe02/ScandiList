@@ -1,0 +1,17 @@
+.card {
+    min-height: 12rem;
+    position: relative;
+}
+
+.card-body {
+    margin-top: -1rem;
+}
+
+.card-text {
+    margin: 0;
+}
+
+.card-checkbox {
+    position: absolute;
+    top: 0;
+}

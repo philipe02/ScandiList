@@ -2,7 +2,7 @@ const Button = ({ id, className, type, title, onClick }) => {
     return (
         <button
             id={id}
-            className={`btn border-2 mx-1 shadow ${className}`}
+            className={`btn border-2 mx-1 ${className}`}
             type={type}
             onClick={onClick}
         >
