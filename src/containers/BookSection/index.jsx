@@ -14,7 +14,12 @@ const BookSection = ({ handleChange }) => {
                     placeholder="Insert the weight in kg"
                 />
             </div>
-            <p>Please provide weight in kilograms</p>
+            <div className="d-flex justify-content-between mb-3">
+                <label className="form-label"></label>
+                <p className="form-label fs-6 w-75">
+                    Please provide weight in kilograms
+                </p>
+            </div>
         </section>
     );
 };

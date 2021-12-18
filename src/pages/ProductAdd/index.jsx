@@ -1,19 +1,35 @@
 import Button from "../../components/Button";
 import Title from "../../components/Title";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import FormProduct from "../../containers/FormProduct";
+import { createProduct } from "service/Products";
+import formatProductSubmit from "./submit";
+import validateProduct from "./validate";
+import { useDispatch } from "react-redux";
+import { resetErrors } from "store/ducks/products";
 
 const ProductAdd = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [product, setProduct] = useState({});
 
-    function handleSave() {
-        console.log(product);
+    function handleSave(e) {
+        e.preventDefault();
+        //dispatch(resetErrors());
+        if (validateProduct(product, dispatch))
+            createProduct(formatProductSubmit(product)).then(() => {
+                navigate("/");
+            });
     }
 
     function handleChange(e) {
         setProduct({ ...product, [e.target.name]: e.target.value });
     }
+
+    useEffect(() => {
+        //dispatch(resetErrors());
+    }, [dispatch]);
 
     return (
         <>
@@ -23,9 +39,9 @@ const ProductAdd = () => {
                     <Button
                         id="add-product-btn"
                         className="btn-outline-primary"
-                        type="button"
+                        type="submit"
                         title="Save"
-                        onClick={handleSave}
+                        form="product_form"
                     />
                     <Link to="/">
                         <Button
@@ -38,7 +54,11 @@ const ProductAdd = () => {
                 </div>
             </section>
             <hr className="opacity-100 border-top border-2 border-dark" />
-            <FormProduct handleChange={handleChange} product={product} />
+            <FormProduct
+                handleChange={handleChange}
+                product={product}
+                handleSave={handleSave}
+            />
         </>
     );
 };

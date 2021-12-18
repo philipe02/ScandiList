@@ -40,7 +40,12 @@ const FurnitureSection = ({ handleChange }) => {
                     placeholder="Insert the length in cm"
                 />
             </div>
-            <p>Please provide dimensions in HxWxL format in centimeters</p>
+            <div className="d-flex justify-content-between mb-3">
+                <label className="form-label"></label>
+                <p className="form-label fs-6 w-75">
+                    Please provide dimensions in HxWxL format in centimeters
+                </p>
+            </div>
         </section>
     );
 };

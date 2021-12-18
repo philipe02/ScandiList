@@ -11,10 +11,15 @@ const DvdSection = ({ handleChange }) => {
                     className="form-control w-75"
                     type="text"
                     onChange={handleChange}
-                    placeholder="Insert the size in cm"
+                    placeholder="Insert the size in mb"
                 />
             </div>
-            <p>Please provide size in megabytes</p>
+            <div className="d-flex justify-content-between mb-3">
+                <label className="form-label"></label>
+                <p className="form-label fs-6 w-75">
+                    Please provide size in megabytes
+                </p>
+            </div>
         </section>
     );
 };

@@ -1,19 +1,13 @@
+import { useDispatch } from "react-redux";
+import { selectProduct } from "store/ducks/products";
 import ProductCard from "../ProductCard";
 import "./styles.css";
 
 const ProductsContainer = ({ products, setProducts }) => {
+    const dispatch = useDispatch();
     function handleSelection(e, product) {
-        const productIndex =
-            products.find((item) => item.sku === product.sku).sku - 1;
-        let newProductList = products;
-        newProductList[productIndex] = {
-            ...newProductList[productIndex],
-            [e.target.name]: newProductList[productIndex].selected
-                ? false
-                : true,
-        };
-        console.log(newProductList);
-        setProducts(newProductList);
+        console.log(e.target.checked, product.sku);
+        dispatch(selectProduct({ sku: product.sku, check: e.target.checked }));
     }
     return (
         <section className="container">

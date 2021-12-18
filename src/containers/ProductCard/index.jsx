@@ -1,15 +1,15 @@
 import "./styles.css";
 
 const ProductCard = ({ product, handleSelection }) => {
-    const productTypeDesc = {
-        dvd: <p className="card-text">Size: {product.size} MB</p>,
-        furniture: (
+    const productType = {
+        1: <p className="card-text">Size: {product.size} MB</p>,
+        2: (
             <p className="card-text">
                 Dimension:{" "}
                 {`${product.height}x${product.width}x${product["length"]}`}
             </p>
         ),
-        book: <p className="card-text">Weight: {product.weight} KG</p>,
+        3: <p className="card-text">Weight: {product.weight} KG</p>,
     };
     return (
         <div className="d-flex justify-content-around border border-dark border-2 card">
@@ -24,7 +24,7 @@ const ProductCard = ({ product, handleSelection }) => {
                 <p className="card-text">{product.sku}</p>
                 <p className="card-text">{product.name}</p>
                 <p className="card-text">{product.price.toFixed(2)} $</p>
-                {productTypeDesc[product.type]}
+                {productType[product.productType]}
             </div>
         </div>
     );

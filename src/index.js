@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from 'store'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
 import ProductAdd from './pages/ProductAdd';
@@ -8,14 +10,16 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <div className='container mt-4'>
-        <Routes>
-          <Route path="/" element={<ProductList />} />
-          <Route path="add-product" element={<ProductAdd />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className='container mt-4'>
+          <Routes>
+            <Route path="/" element={<ProductList />} />
+            <Route path="add-product" element={<ProductAdd />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

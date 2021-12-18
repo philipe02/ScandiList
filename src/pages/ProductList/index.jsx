@@ -1,71 +1,36 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { resetSelected } from "store/ducks/products";
 import Button from "../../components/Button";
 import Title from "../../components/Title";
 import ProductsContainer from "../../containers/ProductsContainer";
+import { deleteProducts, getAllProducts } from "../../service/Products";
 
 const ProductList = () => {
-    const productList = [
-        {
-            sku: 1,
-            name: "Roules",
-            price: 20.0,
-            type: "dvd",
-            size: 10.5,
-        },
-        {
-            sku: 2,
-            name: "Roules",
-            price: 20.0,
-            type: "furniture",
-            height: 10.5,
-            width: 10.5,
-            length: 10.5,
-        },
-        {
-            sku: 3,
-            name: "Roules",
-            price: 20.0,
-            type: "book",
-            weight: 10.5,
-        },
-        {
-            sku: 4,
-            name: "Roules",
-            price: 20.0,
-            type: "dvd",
-            size: 10.5,
-        },
-        {
-            sku: 5,
-            name: "Roules",
-            price: 20.0,
-            type: "furniture",
-            height: 10.5,
-            width: 10.5,
-            length: 10.5,
-        },
-        {
-            sku: 6,
-            name: "Roules",
-            price: 20.0,
-            type: "dvd",
-            size: 10.5,
-        },
-    ];
-
     const [products, setProducts] = useState([]);
+    const selected = useSelector((state) => state.products.selectedProducts);
+    const dispatch = useDispatch();
 
-    useEffect(() => setProducts(productList), []);
+    useEffect(() => {
+        refreshProductList();
+        dispatch(resetSelected());
+    }, [dispatch]);
 
     useEffect(() => console.log(products), [products]);
 
-    function handleDelete() {
-        let deleteList = [];
-        products.forEach((item) => {
-            if (item.selected) deleteList.push(item.sku);
+    function refreshProductList() {
+        getAllProducts().then((data) => {
+            console.log(data);
+            setProducts(data);
         });
-        console.log(deleteList);
+    }
+
+    function handleDelete() {
+        deleteProducts(selected).then(() => {
+            refreshProductList();
+        });
     }
 
     return (

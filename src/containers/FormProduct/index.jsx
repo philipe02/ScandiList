@@ -1,27 +1,51 @@
+import { useSelector } from "react-redux";
 import BookSection from "../BookSection";
 import DvdSection from "../DvdSection";
 import FurnitureSection from "../FurnitureSection";
 
-const FormProduct = ({ product, handleChange }) => {
+const FormProduct = ({ product, handleChange, handleSave }) => {
+    const { errors } = useSelector((state) => state.products);
     const productSection = {
-        dvd: <DvdSection handleChange={handleChange} />,
-        furniture: <FurnitureSection handleChange={handleChange} />,
-        book: <BookSection handleChange={handleChange} />,
+        1: <DvdSection handleChange={handleChange} />,
+        2: <FurnitureSection handleChange={handleChange} />,
+        3: <BookSection handleChange={handleChange} />,
     };
     return (
-        <form id="product_form" className="justify-self-start w-50">
-            <div className="d-flex justify-content-between mb-3">
+        <form
+            id="product_form"
+            className="w-75 needs-validation"
+            onSubmit={handleSave}
+            noValidate
+        >
+            <button onClick={() => console.log(errors)}>Debug</button>
+            <div className="d-flex justify-content-between mb-2">
                 <label htmlFor="sku" className="form-label">
                     SKU
                 </label>
-                <input
-                    id="sku"
-                    name="sku"
-                    className="form-control w-75"
-                    type="text"
-                    onChange={handleChange}
-                    placeholder="Insert the product sku"
-                />
+                <div className="w-75">
+                    <input
+                        id="sku"
+                        name="sku"
+                        className={`form-control ${
+                            errors.find((error) => error.fieldName === "sku")
+                                ? "is-invalid"
+                                : ""
+                        }`}
+                        type="text"
+                        onChange={handleChange}
+                        placeholder="Insert the product sku"
+                        required
+                    />
+                    {errors.find((error) => error.fieldName === "sku") ? (
+                        <p className="invalid-feedback m-0">
+                            {
+                                errors.find(
+                                    (error) => error.fieldName === "sku"
+                                ).message
+                            }{" "}
+                        </p>
+                    ) : null}
+                </div>
             </div>
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="name" className="form-label">
@@ -51,21 +75,21 @@ const FormProduct = ({ product, handleChange }) => {
             </div>
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="productType" className="form-label">
-                    Price ($)
+                    Type
                 </label>
                 <select
                     id="productType"
-                    name="type"
+                    name="productType"
                     className="form-select w-75"
                     onChange={handleChange}
                 >
                     <option defaultValue="">Select the product type</option>
-                    <option value="dvd">DVD</option>
-                    <option value="book">Book</option>
-                    <option value="furniture">Furniture</option>
+                    <option value="1">DVD</option>
+                    <option value="2">Furniture</option>
+                    <option value="3">Book</option>
                 </select>
             </div>
-            {product.type ? productSection[product.type] : null}
+            {product.productType ? productSection[product.productType] : null}
         </form>
     );
 };

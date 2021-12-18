@@ -1,9 +1,10 @@
-const Button = ({ id, className, type, title, onClick }) => {
+const Button = ({ id, className, type, title, onClick, form }) => {
     return (
         <button
             id={id}
             className={`btn border-2 mx-1 ${className}`}
             type={type}
+            form={form}
             onClick={onClick}
         >
             {title}
