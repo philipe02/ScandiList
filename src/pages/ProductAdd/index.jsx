@@ -16,7 +16,7 @@ const ProductAdd = () => {
 
     function handleSave(e) {
         e.preventDefault();
-        //dispatch(resetErrors());
+        dispatch(resetErrors());
         if (validateProduct(product, dispatch))
             createProduct(formatProductSubmit(product)).then(() => {
                 navigate("/");
@@ -28,7 +28,7 @@ const ProductAdd = () => {
     }
 
     useEffect(() => {
-        //dispatch(resetErrors());
+        dispatch(resetErrors());
     }, [dispatch]);
 
     return (

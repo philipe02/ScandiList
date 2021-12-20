@@ -1,17 +1,19 @@
-const DvdSection = ({ handleChange }) => {
+import Input from "components/Input";
+
+const DvdSection = ({ handleChange, errors }) => {
     return (
         <section id="DVD">
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="size" className="form-label">
                     Size (MB)
                 </label>
-                <input
+                <Input
                     id="size"
                     name="size"
-                    className="form-control w-75"
-                    type="text"
                     onChange={handleChange}
+                    type="number"
                     placeholder="Insert the size in mb"
+                    errors={errors}
                 />
             </div>
             <div className="d-flex justify-content-between mb-3">

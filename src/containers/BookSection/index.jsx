@@ -1,17 +1,19 @@
-const BookSection = ({ handleChange }) => {
+import Input from "components/Input";
+
+const BookSection = ({ handleChange, errors }) => {
     return (
         <section>
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="weight" className="form-label">
                     Weight (KG)
                 </label>
-                <input
+                <Input
                     id="weight"
                     name="weight"
-                    className="form-control w-75"
-                    type="text"
                     onChange={handleChange}
+                    type="number"
                     placeholder="Insert the weight in kg"
+                    errors={errors}
                 />
             </div>
             <div className="d-flex justify-content-between mb-3">

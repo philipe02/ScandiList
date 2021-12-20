@@ -1,3 +1,6 @@
+import Input from "components/Input";
+import Select from "components/Select";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import BookSection from "../BookSection";
 import DvdSection from "../DvdSection";
@@ -6,9 +9,9 @@ import FurnitureSection from "../FurnitureSection";
 const FormProduct = ({ product, handleChange, handleSave }) => {
     const { errors } = useSelector((state) => state.products);
     const productSection = {
-        1: <DvdSection handleChange={handleChange} />,
-        2: <FurnitureSection handleChange={handleChange} />,
-        3: <BookSection handleChange={handleChange} />,
+        1: <DvdSection handleChange={handleChange} errors={errors} />,
+        2: <FurnitureSection handleChange={handleChange} errors={errors} />,
+        3: <BookSection handleChange={handleChange} errors={errors} />,
     };
     return (
         <form
@@ -17,77 +20,59 @@ const FormProduct = ({ product, handleChange, handleSave }) => {
             onSubmit={handleSave}
             noValidate
         >
-            <button onClick={() => console.log(errors)}>Debug</button>
             <div className="d-flex justify-content-between mb-2">
                 <label htmlFor="sku" className="form-label">
                     SKU
                 </label>
-                <div className="w-75">
-                    <input
-                        id="sku"
-                        name="sku"
-                        className={`form-control ${
-                            errors.find((error) => error.fieldName === "sku")
-                                ? "is-invalid"
-                                : ""
-                        }`}
-                        type="text"
-                        onChange={handleChange}
-                        placeholder="Insert the product sku"
-                        required
-                    />
-                    {errors.find((error) => error.fieldName === "sku") ? (
-                        <p className="invalid-feedback m-0">
-                            {
-                                errors.find(
-                                    (error) => error.fieldName === "sku"
-                                ).message
-                            }{" "}
-                        </p>
-                    ) : null}
-                </div>
+                <Input
+                    id="sku"
+                    name="sku"
+                    onChange={handleChange}
+                    placeholder="Insert the product sku"
+                    errors={errors}
+                />
             </div>
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="name" className="form-label">
                     Name
                 </label>
-                <input
+                <Input
                     id="name"
                     name="name"
-                    className="form-control w-75"
-                    type="text"
                     onChange={handleChange}
                     placeholder="Insert the product name"
+                    errors={errors}
                 />
             </div>
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="price" className="form-label">
                     Price ($)
                 </label>
-                <input
+                <Input
                     id="price"
                     name="price"
-                    className="form-control w-75"
-                    type="text"
                     onChange={handleChange}
+                    type="number"
                     placeholder="Insert the product price"
+                    errors={errors}
                 />
             </div>
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="productType" className="form-label">
                     Type
                 </label>
-                <select
+                <Select
                     id="productType"
                     name="productType"
-                    className="form-select w-75"
                     onChange={handleChange}
-                >
-                    <option defaultValue="">Select the product type</option>
-                    <option value="1">DVD</option>
-                    <option value="2">Furniture</option>
-                    <option value="3">Book</option>
-                </select>
+                    placeholder="Select a product type"
+                    options={[
+                        { value: 1, text: "DVD" },
+                        { value: 2, text: "Furniture" },
+                        { value: 3, text: "Book" },
+                    ]}
+                    errors={errors}
+                />
             </div>
             {product.productType ? productSection[product.productType] : null}
         </form>

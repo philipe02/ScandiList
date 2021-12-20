@@ -1,43 +1,45 @@
-const FurnitureSection = ({ handleChange }) => {
+import Input from "components/Input";
+
+const FurnitureSection = ({ handleChange, errors }) => {
     return (
         <section id="Furniture">
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="height" className="form-label">
                     Height (CM)
                 </label>
-                <input
+                <Input
                     id="height"
                     name="height"
-                    className="form-control w-75"
-                    type="text"
                     onChange={handleChange}
+                    type="number"
                     placeholder="Insert the height in cm"
+                    errors={errors}
                 />
             </div>
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="width" className="form-label">
                     Width (CM)
                 </label>
-                <input
+                <Input
                     id="width"
                     name="width"
-                    className="form-control w-75"
-                    type="text"
                     onChange={handleChange}
+                    type="number"
                     placeholder="Insert the width in cm"
+                    errors={errors}
                 />
             </div>
             <div className="d-flex justify-content-between mb-3">
                 <label htmlFor="length" className="form-label">
                     Length (CM)
                 </label>
-                <input
+                <Input
                     id="length"
                     name="length"
-                    className="form-control w-75"
-                    type="text"
                     onChange={handleChange}
+                    type="number"
                     placeholder="Insert the length in cm"
+                    errors={errors}
                 />
             </div>
             <div className="d-flex justify-content-between mb-3">
