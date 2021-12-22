@@ -20,7 +20,7 @@ const ProductCard = ({ product, handleSelection }) => {
                 onClick={(e) => handleSelection(e, product)}
                 value={product.selected}
             />
-            <div className="d-flex flex-column align-items-center justify-content-center card-body">
+            <div className="d-flex flex-column align-items-center justify-content-center text-break text-center card-body">
                 <p className="card-text">{product.sku}</p>
                 <p className="card-text">{product.name}</p>
                 <p className="card-text">{product.price.toFixed(2)} $</p>
