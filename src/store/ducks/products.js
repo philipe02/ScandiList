@@ -16,7 +16,6 @@ export const setLoading = createAction('SET_LOADING')
 
 const initialState = {
     products: [],
-    selectedProducts: [],
     errors: [],
     loading: false,
     openModal: false,
@@ -24,18 +23,6 @@ const initialState = {
 }
 
 export default createReducer(initialState, {
-    [selectProduct.type]: (state, action) => {
-        if (action.payload.check) {
-            state.selectedProducts = [...state.selectedProducts, action.payload.sku]
-        } else {
-            let newSelectedList = state.selectedProducts
-            newSelectedList.splice(newSelectedList.indexOf(action.payload.sku), 1)
-            state.selectedProducts = newSelectedList
-        }
-    },
-    [resetSelected.type]: (state, action) => {
-        return { ...state, selectedProducts: [] }
-    },
     [setErrors.type]: (state, action) => {
         return { ...state, errors: action.payload }
     },

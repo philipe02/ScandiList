@@ -1,6 +1,6 @@
 import "./styles.css";
 
-const ProductCard = ({ product, handleSelection }) => {
+const ProductCard = ({ product }) => {
     const productType = {
         1: <p className="card-text">Size: {product.size} MB</p>,
         2: (
@@ -17,8 +17,7 @@ const ProductCard = ({ product, handleSelection }) => {
                 className="form-check-input ms-3 mt-3 card-checkbox delete-checkbox"
                 type="checkbox"
                 name="selected"
-                onClick={(e) => handleSelection(e, product)}
-                value={product.selected}
+                value={product.sku}
             />
             <div className="d-flex flex-column align-items-center justify-content-center text-break text-center card-body">
                 <p className="card-text">{product.sku}</p>

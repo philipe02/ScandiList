@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { resetSelected, setLoading } from "store/ducks/products";
 import Button from "../../components/Button";
@@ -10,7 +9,6 @@ import { deleteProducts, getAllProducts } from "../../service/Products";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
-    const selected = useSelector((state) => state.products.selectedProducts);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,6 +27,11 @@ const ProductList = () => {
     }
 
     function handleDelete() {
+        let selected = [];
+        document.querySelectorAll(".delete-checkbox").forEach((element) => {
+            if (element.checked) selected.push(element.value);
+        });
+
         if (selected.length)
             deleteProducts(selected).then(() => {
                 refreshProductList();
@@ -58,7 +61,7 @@ const ProductList = () => {
                 </div>
             </section>
             <hr className="opacity-100 border-top border-2 border-dark" />
-            <ProductsContainer products={products} setProducts={setProducts} />
+            <ProductsContainer products={products} />
         </>
     );
 };
