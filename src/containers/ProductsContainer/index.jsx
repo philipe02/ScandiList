@@ -1,18 +1,22 @@
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { selectProduct } from "store/ducks/products";
 import ProductCard from "../ProductCard";
-import "./styles.css";
 
 const ProductsContainer = ({ products, setProducts }) => {
     const dispatch = useDispatch();
+    const { loading } = useSelector((state) => state.products);
     function handleSelection(e, product) {
-        console.log(e.target.checked, product.sku);
         dispatch(selectProduct({ sku: product.sku, check: e.target.checked }));
     }
     return (
         <section className="container">
             <div className="product-list">
-                {products.length !== 0 ? (
+                {loading ? (
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                ) : products.length !== 0 ? (
                     products.map((product) => (
                         <ProductCard
                             key={product.sku}

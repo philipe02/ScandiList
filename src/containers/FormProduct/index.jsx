@@ -1,6 +1,5 @@
 import Input from "components/Input";
 import Select from "components/Select";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import BookSection from "../BookSection";
 import DvdSection from "../DvdSection";

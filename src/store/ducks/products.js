@@ -24,10 +24,15 @@ const initialState = {
 }
 
 export default createReducer(initialState, {
-    [selectProduct.type]: (state, action) =>
-        action.payload.check ?
-            { ...state, selectedProducts: [...state.selectedProducts, action.payload.sku] } :
-            { ...state, selectedProducts: state.selectedProducts.splice(state.selectedProducts.indexOf(action.payload.sku, 1)) },
+    [selectProduct.type]: (state, action) => {
+        if (action.payload.check) {
+            state.selectedProducts = [...state.selectedProducts, action.payload.sku]
+        } else {
+            let newSelectedList = state.selectedProducts
+            newSelectedList.splice(newSelectedList.indexOf(action.payload.sku), 1)
+            state.selectedProducts = newSelectedList
+        }
+    },
     [resetSelected.type]: (state, action) => {
         return { ...state, selectedProducts: [] }
     },
@@ -44,6 +49,6 @@ export default createReducer(initialState, {
         return { ...state, openModal: false, modalOptions: { message: '', type: '', actions: [] } }
     },
     [setLoading.type]: (state, action) => {
-        return { ...state, loading: !state.loading }
+        return { ...state, loading: action.payload }
     }
 })

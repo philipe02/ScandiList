@@ -7,7 +7,7 @@ import { createProduct } from "service/Products";
 import formatProductSubmit from "./submit";
 import validateProduct from "./validate";
 import { useDispatch } from "react-redux";
-import { resetErrors } from "store/ducks/products";
+import { closeModal, openModal, resetErrors } from "store/ducks/products";
 
 const ProductAdd = () => {
     const navigate = useNavigate();
@@ -18,9 +18,43 @@ const ProductAdd = () => {
         e.preventDefault();
         dispatch(resetErrors());
         if (validateProduct(product, dispatch))
-            createProduct(formatProductSubmit(product)).then(() => {
-                navigate("/");
-            });
+            createProduct(formatProductSubmit(product))
+                .then(() => {
+                    navigate("/");
+                })
+                .catch(({ response }) => {
+                    if (response?.data?.message)
+                        dispatch(
+                            openModal({
+                                type: "error",
+                                message: response?.data?.message,
+                                actions: [
+                                    {
+                                        id: "confirm",
+                                        title: "OK",
+                                        onClick: () => dispatch(closeModal()),
+                                        className: "btn-outline-primary",
+                                    },
+                                ],
+                            })
+                        );
+                });
+        else {
+            dispatch(
+                openModal({
+                    type: "error",
+                    message: "Please, submit required data",
+                    actions: [
+                        {
+                            id: "confirm",
+                            title: "OK",
+                            onClick: () => dispatch(closeModal()),
+                            className: "btn-outline-primary",
+                        },
+                    ],
+                })
+            );
+        }
     }
 
     function handleChange(e) {

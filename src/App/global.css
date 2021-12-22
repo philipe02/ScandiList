@@ -28,6 +28,12 @@ code {
     align-items: center;
 }
 
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
 .modal-container {
     top: 0;
     left: 0;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { openModal, resetSelected, setLoading } from "store/ducks/products";
+import { resetSelected, setLoading } from "store/ducks/products";
 import Button from "../../components/Button";
 import Title from "../../components/Title";
 import ProductsContainer from "../../containers/ProductsContainer";
@@ -18,22 +18,20 @@ const ProductList = () => {
         dispatch(resetSelected());
     }, [dispatch]);
 
-    useEffect(() => console.log(products), [products]);
-
     function refreshProductList() {
-        dispatch(openModal({ type: "error", message: "Error message" }));
+        dispatch(setLoading(true));
         getAllProducts()
             .then((data) => {
-                console.log(data);
                 setProducts(data);
             })
-            .finally(() => dispatch(setLoading()));
+            .finally(() => dispatch(setLoading(false)));
     }
 
     function handleDelete() {
-        deleteProducts(selected).then(() => {
-            refreshProductList();
-        });
+        if (selected.length)
+            deleteProducts(selected).then(() => {
+                refreshProductList();
+            });
     }
 
     return (

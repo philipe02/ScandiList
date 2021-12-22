@@ -1,17 +1,20 @@
 import axios from './'
 
 export async function getAllProducts() {
-    const { data } = await axios.get('/product')
-    return data
+    return axios.get('/product')
+        .then(response => response.data)
+        .catch(error => { throw error })
 }
 
 export async function createProduct(product) {
-    const { data } = await axios.post('/product', product)
-    return data
+    return axios.post('/product', product)
+        .then(response => response.data)
+        .catch(error => { throw error })
+
 }
 
 export async function deleteProducts(products) {
-    console.log(products);
-    const { data } = await axios.delete('/product', { data: { sku: products } })
-    return data
+    return axios.delete('/product', { data: { sku: products } })
+        .then(response => response.data)
+        .catch(error => { throw error })
 }

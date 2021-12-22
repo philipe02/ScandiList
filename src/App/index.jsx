@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./global.css";
 import ProductAdd from "pages/ProductAdd";
 import ProductList from "pages/ProductList";
-import Loading from "components/Loading";
 import Modal from "components/Modal";
 
 const App = () => {
@@ -20,7 +19,6 @@ const App = () => {
                                 element={<ProductAdd />}
                             />
                         </Routes>
-                        <Loading />
                         <Modal />
                     </div>
                 </BrowserRouter>
