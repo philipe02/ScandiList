@@ -16,7 +16,7 @@ const ProductList = () => {
     useEffect(() => {
         refreshProductList();
         dispatch(resetSelected());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
     function refreshProductList() {
@@ -45,14 +45,14 @@ const ProductList = () => {
                             id="add-product-btn"
                             className="btn-outline-primary"
                             type="button"
-                            title="Add"
+                            title="ADD"
                         />
                     </Link>
                     <Button
                         id="delete-product-btn"
                         className="btn-outline-danger"
                         type="button"
-                        title="Mass delete"
+                        title="MASS DELETE"
                         onClick={handleDelete}
                     />
                 </div>

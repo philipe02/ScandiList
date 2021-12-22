@@ -14,7 +14,7 @@ const ProductCard = ({ product, handleSelection }) => {
     return (
         <div className="d-flex justify-content-around border border-dark border-2 card">
             <input
-                className="form-check-input ms-3 mt-3 card-checkbox"
+                className="form-check-input ms-3 mt-3 card-checkbox delete-checkbox"
                 type="checkbox"
                 name="selected"
                 onClick={(e) => handleSelection(e, product)}
