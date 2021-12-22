@@ -16,6 +16,7 @@ const ProductList = () => {
     useEffect(() => {
         refreshProductList();
         dispatch(resetSelected());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
     function refreshProductList() {
